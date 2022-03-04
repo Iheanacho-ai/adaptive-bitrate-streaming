@@ -1,31 +1,28 @@
-import Head from 'next/head';
-import "cloudinary-video-player/dist/cld-video-player.min.js";
-import "cloudinary-video-player/dist/cld-video-player.min.css";
-import { Cloudinary } from "cloudinary-core";
-import { useEffect } from "react";
 
-const Home = () => {
-  const cld = new Cloudinary({ cloud_name: "amarachi-2812", secure: true});
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import dynamic from "next/dynamic"; //add
 
-  const up_options = {
-    resource_type: "video", type: "upload",
-    eager: [
-      { streaming_profile: "hd", format: "m3u8" }, 
-    ] 
-  };
-  cld.v2.uploader.explicit("videoplayback_1_pr2hzi", up_options, function(result) {console.log(result); } );
+//add
+const NativeVideo = dynamic(
+  () => import("../components/video-player"),
+  { ssr: false }
+);
 
-  useEffect(() => {
-    const videoPlayer = cld.videoPlayer("video-player", {
-      controls: true
-    });
-    videoPlayer.source("videoplayback_1_pr2hzi");
-  },[]);
-  
+export default function IndexPage() {
   return (
-    <div>
-      <video id="video-player" />
+    <div className={styles.container}>
+      <Head>
+        <title>Video Player with Cloudinary</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <header className={styles.header}>
+        <h1>Video Player</h1>
+      </header>
+      <section className={styles.video_player}>
+        {/* <VideoPlayer /> */}
+        <NativeVideo />
+      </section>
     </div>
   );
-};
-export default Home;
+}
