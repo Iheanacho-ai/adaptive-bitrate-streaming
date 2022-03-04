@@ -7,13 +7,19 @@ const VideoPlayer = () => {
   const cld = new Cloudinary({ cloud_name: "amarachi-2812" });
   useEffect(() => {
     const videoPlayer = cld.videoPlayer("video-player", {
-      muted: true,
-      controls: true
+      controls:true,
+      autoplay: true
     });
-    videoPlayer.source("videoplayback_1_pr2hzi");
+    videoPlayer.source("videoplayback_1_pr2hzi", { 
+      sourceTypes: ['hls'], 
+      transformation: {
+          streaming_profile: 'hd',
+          
+      } 
+  });
   });
 
-  cld.url('videoplayback_1_pr2hzi.m3u8', {streamingProfile: "full_hd"}, {resource_type: 'video'});
+  // cld.url('videoplayback_1_pr2hzi.m3u8', {streamingProfile: "full_hd"}, {resource_type: 'video'});
 
   return (
     <div>
