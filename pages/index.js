@@ -13,7 +13,7 @@ const Home = () => {
       { streaming_profile: "hd", format: "m3u8" }, 
     ] 
   };
-  cloudinary.v2.uploader.explicit("videoplayback_1_pr2hzi", up_options, function(result) {console.log(result); } );
+  cld.v2.uploader.explicit("videoplayback_1_pr2hzi", up_options, function(result) {console.log(result); } );
 
   useEffect(() => {
     const videoPlayer = cld.videoPlayer("video-player", {
