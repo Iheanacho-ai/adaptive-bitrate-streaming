@@ -10,10 +10,10 @@ const VideoPlayer = () => {
       controls:true,
       autoplay: true
     });
-    videoPlayer.source("videoplayback_1_pr2hzi", { 
+    videoPlayer.source("nature", { 
       sourceTypes: ['hls'], 
       transformation: {
-          streaming_profile: 'hd',
+          streaming_profile: 'full_hd',
           
       } 
   });
